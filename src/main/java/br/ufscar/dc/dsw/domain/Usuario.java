@@ -1,49 +1,49 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+//import javax.persistence.ManyToMany;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
 
+@SuppressWarnings("serial")
 @Entity
-@Table(name = "Admin")
-public class Admin {
+@Table(name = "Usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario extends AbstractEntity<Long> {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
 	@Column(nullable = false, length = 256)
 	private String nome;
 	
+	@NotBlank(message = "{NotBlank.usuario.login}")
+	@Size(max = 256, message = "{Size.usuario.login}")
 	@Column(nullable = false, unique = true, length = 256)
 	private String login;
 	
+	@NotBlank(message = "{NotBlank.usuario.senha}")
+	@Size(max = 64, message = "{Size.usuario.senha}")
 	@Column(nullable = false, length = 64)
 	private String senha;
 	
-	public Admin() {
+	public Usuario() {
 		
 	}
 	
-	public Admin(Long id, String nome, String login, String senha) {
-		this.id = id;
+	public Usuario(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 	}
 	
+	@Override
 	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		return super.getId();
 	}
 
 	public String getNome() {
