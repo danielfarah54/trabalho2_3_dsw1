@@ -38,9 +38,7 @@ public class Hotel extends Usuario {
         super(nome,email,senha);
         
         this.cnpj = cnpj;
-        this.cidades = cidades;
-        
-        
+        this.cidades = cidades;       
     }
     
     public Hotel(Long id, String cnpj, String nome, Set<Cidade> cidades, String email, String senha) {
