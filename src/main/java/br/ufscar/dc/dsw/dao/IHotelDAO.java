@@ -11,11 +11,10 @@ public interface IHotelDAO extends CrudRepository<Hotel, Long>{
 	Hotel findById(long id);
 	
 	List<Hotel> findAll();
-
-	List<Hotel> findByCidades(Cidade cidade);
 	
-	Hotel save (Hotel hotel);
+	List<Hotel> findByCidades(Cidade cidade); // Devolve todas os hotéis de uma cidade.(?)
+	
+	Hotel save (Hotel hotel); // faz as operações de save e update.
 	
 	void deleteById(Long id);
-
 }

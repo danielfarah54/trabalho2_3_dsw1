@@ -9,7 +9,7 @@ import br.ufscar.dc.dsw.domain.Cidade;
 import br.ufscar.dc.dsw.service.spec.ICidadeService;
 
 @Service
-@Transactional(readOnly = false)
+@Transactional(readOnly = false) //Operações sem anotação não podem ocorrer em paralelo.
 public class CidadeService implements ICidadeService{
 
 	@Autowired
@@ -22,6 +22,11 @@ public class CidadeService implements ICidadeService{
 	public void excluir(Long id) {
 		dao.deleteById(id);
 	}
+
+//	@Transactional(readOnly = true) //Necessário?
+//	public Cidade buscarPorId(Long id) {
+//		return dao.findById(id.longValue());
+//	}
 
 	@Transactional(readOnly = true)
 	public List<Cidade> buscarTodas() {

@@ -8,5 +8,7 @@ public interface ICidadeService {
 
 	public void excluir(Long id);
 
+//	public Cidade buscarPorId(Long id);
+	
 	public List<Cidade> buscarTodas();
 }

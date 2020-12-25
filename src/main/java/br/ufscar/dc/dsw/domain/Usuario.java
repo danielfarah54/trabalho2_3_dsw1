@@ -2,21 +2,26 @@ package br.ufscar.dc.dsw.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
+import javax.persistence.Inheritance; //??/
 import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 //import javax.persistence.ManyToMany;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+//Classe mapeada para a tabela:
+//create table usuario(
+//	);
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario extends AbstractEntity<Long> {
+public class Usuario extends AbstractEntity<Long>{
+
 
 	@Column(nullable = false, length = 256)
 	private String nome;
@@ -45,6 +50,10 @@ public class Usuario extends AbstractEntity<Long> {
 	public Long getId() {
 		return super.getId();
 	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 
 	public String getNome() {
 		return nome;
