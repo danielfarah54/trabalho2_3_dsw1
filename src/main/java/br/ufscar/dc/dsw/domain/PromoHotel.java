@@ -1,5 +1,8 @@
 package br.ufscar.dc.dsw.domain;
 
+
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
@@ -9,9 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 //create table PromoHotel(
+
 //	);
 
 @SuppressWarnings("serial")
@@ -19,9 +25,9 @@ import javax.validation.constraints.Size;
 @Table(name = "PromoHotel")
 public class PromoHotel extends AbstractEntity<Long>{
 	
-	@NotBlank(message = "{NotBlank.promoHotel.preco}")
+	@NotNull(message = "{NotBlank.promoHotel.preco}")
 	@Column(nullable=false, unique=false)
-    private float preco;
+    private double preco; //float e double não funcionam (?).
 	
 	@NotBlank(message = "{NotBlank.promoHotel.iniciopromo}")
 	@Size(min = 10, max = 10, message = "{Size.promoHotel.iniciopromo}")
@@ -50,7 +56,15 @@ public class PromoHotel extends AbstractEntity<Long>{
 //        this.id = id;
 //    }
 
-	public PromoHotel(float preco, String iniciopromo, String fimpromo, Hotel hotel, SiteReserva sitereserva) {
+	public PromoHotel(double preco, String iniciopromo, String fimpromo, Hotel hotel) {
+		this.preco = preco;
+	    this.iniciopromo = iniciopromo;
+	    this.fimpromo = fimpromo;
+	    this.hotel = hotel;
+	    this.sitereserva = new SiteReserva();
+	}
+	
+	public PromoHotel(double preco, String iniciopromo, String fimpromo, Hotel hotel, SiteReserva sitereserva) {
 		this.preco = preco;
 	    this.iniciopromo = iniciopromo;
 	    this.fimpromo = fimpromo;
@@ -58,7 +72,7 @@ public class PromoHotel extends AbstractEntity<Long>{
 	    this.sitereserva = sitereserva;
 	}
 	
-	public PromoHotel(Long id, float preco, String iniciopromo, String fimpromo, Hotel hotel, SiteReserva sitereserva) {
+	public PromoHotel(Long id, double preco, String iniciopromo, String fimpromo, Hotel hotel, SiteReserva sitereserva) {
 	    this(preco, iniciopromo, fimpromo, hotel, sitereserva);
 	    //this.id = id;
 	}
@@ -71,11 +85,11 @@ public class PromoHotel extends AbstractEntity<Long>{
 //        this.id = id;
 //    }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 

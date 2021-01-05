@@ -1,7 +1,11 @@
 package br.ufscar.dc.dsw.domain;
 
+
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set; //Classe do java que permite não repetição.
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,8 +19,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 //Classe mapeada para a tabela:
 //create table Hotel(
+
 //	);
 
 @SuppressWarnings("serial")
@@ -36,7 +42,7 @@ public class Hotel extends Usuario{
     
 	//Uma cidade pode conter vários hotéis, e um hotel pode estar em várias cidades.
 	@ManyToMany(targetEntity=Cidade.class, mappedBy = "hotelDaCidade") //a string é mapeada para o atributo chamado hotelDaCidade da classe Cidade.
-	private Set<Cidade> cidades;
+	private Set<Cidade> cidades = new HashSet<Cidade>();
 
 	//herdado
 //	@NotBlank(message = "{NotBlank.hotel.email}")
@@ -68,12 +74,15 @@ public class Hotel extends Usuario{
 		
 		this.cnpj = cnpj;
 	    this.cidades = cidades;
+	    
+	    
 	}
 	
 	public Hotel(Long id, String cnpj, String nome, Set<Cidade> cidades, String email, String senha) {
 	    this(cnpj, nome, cidades, email, senha);
 	    //this.id = id;
 	}
+	
 
 //
 //    public void setId(Long id) {

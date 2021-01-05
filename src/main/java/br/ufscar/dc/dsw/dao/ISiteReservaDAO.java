@@ -1,7 +1,9 @@
 package br.ufscar.dc.dsw.dao;
 
 import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
+
 import br.ufscar.dc.dsw.domain.SiteReserva;
 
 @SuppressWarnings("unchecked")
@@ -16,3 +18,4 @@ public interface ISiteReservaDAO extends CrudRepository<SiteReserva, Long>{
 	void deleteById(Long id);
 
 }
+

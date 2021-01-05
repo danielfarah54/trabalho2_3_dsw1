@@ -1,6 +1,10 @@
 package br.ufscar.dc.dsw.domain;
 
+
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set; //Classe do java que permite não repetição.
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
@@ -13,10 +17,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 //Classe mapeada para a tabela:
 //create table Cidade(
-//	);
 
+//	);
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Cidade")
@@ -33,10 +38,12 @@ public class Cidade extends AbstractEntity<Long>{
 	public Cidade() {
 	}
 	
+	
 	public Cidade(String nomeCidade) {
 		this.nomeCidade = nomeCidade;
+		this.hotelDaCidade = new HashSet<Hotel>(); //antes de add, usar método setCidade.
 	}
-		
+	
 	public Cidade(String nomeCidade, Set<Hotel> hotelDaCidade) {
 		this.nomeCidade = nomeCidade;
 		this.hotelDaCidade = hotelDaCidade;
@@ -54,7 +61,8 @@ public class Cidade extends AbstractEntity<Long>{
 	public void setCidade(String nomeCidade) {
 		this.nomeCidade = nomeCidade;
 	}
-
+	
+	
 	public Set<Hotel> getHotelDaCidade() {
 		return this.hotelDaCidade;
 	}

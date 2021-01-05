@@ -1,8 +1,10 @@
 package br.ufscar.dc.dsw.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
 import br.ufscar.dc.dsw.dao.ISiteReservaDAO;
 import br.ufscar.dc.dsw.domain.SiteReserva;
 

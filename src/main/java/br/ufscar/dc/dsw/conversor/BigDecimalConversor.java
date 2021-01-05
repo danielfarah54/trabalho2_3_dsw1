@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.conversor;
 
 import java.math.BigDecimal;
+
 import org.springframework.core.convert.converter.Converter;
 
 public class BigDecimalConversor implements Converter<String, BigDecimal> {
@@ -16,4 +17,5 @@ public class BigDecimalConversor implements Converter<String, BigDecimal> {
 		
 		return new BigDecimal(Double.parseDouble(text));
 	}
+
 }

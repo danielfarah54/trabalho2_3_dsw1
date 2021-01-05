@@ -1,5 +1,6 @@
 package br.ufscar.dc.dsw.domain;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance; //??/
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 
 //Classe mapeada para a tabela:
 //create table usuario(
+
 //	);
 
 @SuppressWarnings("serial")
