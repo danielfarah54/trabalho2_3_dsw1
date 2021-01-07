@@ -13,4 +13,6 @@ public interface ISiteReservaService {
 	public SiteReserva buscarPorId(Long id);
 	
 	public List<SiteReserva> buscarTodos();
+
+	public boolean siteTemPromo(Long id);
 }

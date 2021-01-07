@@ -15,106 +15,64 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import br.ufscar.dc.dsw.domain.Cidade;
-import br.ufscar.dc.dsw.domain.Hotel;
-import br.ufscar.dc.dsw.service.spec.ICidadeService;
-import br.ufscar.dc.dsw.service.spec.IHotelService;
+import br.ufscar.dc.dsw.domain.SiteReserva;
+import br.ufscar.dc.dsw.service.spec.ISiteReservaService;
 
 @Controller
-@RequestMapping("/hoteis")
-public class HotelController {
-	//
+@RequestMapping("/sites")
+public class SiteReservaController {
 	
 	@Autowired
-	private IHotelService service;
-	
-	@Autowired
-	private ICidadeService serviceC;
-	
-	
-		
-	@GetMapping("/listarTodosHoteis") //USA MÉTODO GET
-	public String listarTodosHoteis(ModelMap model) {
-		model.addAttribute("hoteis",service.buscarTodos());
-		//o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
-		return "hoteis/listarTodosHoteis"; // renderiza para a visão hoteis/listarTodosHoteis
-	}
-	
-	@PostMapping("/listarTodosHoteis") //USA MÉTODO POST
-	public String listarTodosHoteisPost(ModelMap model) {
-		model.addAttribute("hoteis",service.buscarTodos());
-		//o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
-		return "hoteis/listarTodosHoteis"; // renderiza para a visão hoteis/listarTodosHoteis
-	}
-
-	@GetMapping("/formParaBuscaDeHotelPorCidade")
-	public String formParaBuscaDeHotelPorCidade(@RequestParam(required = false) String cidadeParaSelecionar, ModelMap model) {
-		List<Cidade>cidades = serviceC.buscarTodas();
-		model.addAttribute("cidadesParaSelecionar", cidades);
-		
-		if (cidadeParaSelecionar != null) {
-			Cidade cidade = new Cidade();
-			for (Cidade cidadeDaLista : cidades) {
-				if (cidadeDaLista.getCidade().equals(cidadeParaSelecionar))
-				{
-					cidade = cidadeDaLista;
-					break;
-				}
-			}
-			model.addAttribute("hotelDaCidade", service.buscarTodosHoteisDaCidade(cidade));
-		}
-		
-		return "hoteis/formParaBuscaDeHotelPorCidade"; //Renderiza para formParaBuscaDeHotelPorCidade.html
-	}
+	private ISiteReservaService service;
 
 	@GetMapping("/cadastrar")
-	public String cadastrar(Hotel hotel) {
-		return "hotel/cadastro";
+	public String cadastrar(SiteReserva sitereserva) {
+		return "sitereserva/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		model.addAttribute("hoteis",service.buscarTodos());
-		return "hotel/lista";
+		model.addAttribute("sites",service.buscarTodos());
+		return "sitereserva/lista";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Hotel hotel, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid SiteReserva sitereserva, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "hotel/cadastro";
+			return "sitereserva/cadastro";
 		}
 		
-		service.salvar(hotel);
-		attr.addFlashAttribute("sucess", "Hotel inserido com sucesso.");
-		return "redirect:/hoteis/listar";
+		service.salvar(sitereserva);
+		attr.addFlashAttribute("sucess", "Site de Reserva inserido com sucesso.");
+		return "redirect:/sites/listar";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("hotel", service.buscarPorId(id));
-		return "hotel/cadastro";
+		model.addAttribute("sitereserva", service.buscarPorId(id));
+		return "sitereserva/cadastro";
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Hotel hotel, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid SiteReserva sitereserva, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "hotel/cadastro";
+			return "sitereserva/cadastro";
 		}
 
-		service.salvar(hotel);
-		attr.addFlashAttribute("sucess", "Hotel editado com sucesso.");
-		return "redirect:/hoteis/listar";
+		service.salvar(sitereserva);
+		attr.addFlashAttribute("sucess", "Site de Reserva editado com sucesso.");
+		return "redirect:/sites/listar";
 	}
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if (service.hotelTemPromo(id)) {
-			model.addAttribute("fail", "Hotel não excluído. Possui promo(s) vinculada(s).");
+		if (service.siteTemPromo(id)) {
+			model.addAttribute("fail", "Site de Reserva não excluído. Possui promo(s) vinculada(s).");
 		} else {
 			service.excluir(id);
-			model.addAttribute("sucess", "Hotel excluído com sucesso.");
+			model.addAttribute("sucess", "Site de Reserva excluído com sucesso.");
 		}
 		return listar(model);
 	}
