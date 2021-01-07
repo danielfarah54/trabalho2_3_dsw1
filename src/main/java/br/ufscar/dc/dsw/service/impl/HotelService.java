@@ -42,4 +42,9 @@ public class HotelService implements IHotelService{
 	public List<Hotel> buscarTodosHoteisDaCidade(Cidade cidade) {
 		return dao.findByCidades(cidade);
 	}
+
+	@Transactional(readOnly = true)
+	public boolean hotelTemPromo(Long id) {
+		return !dao.findById(id.longValue()).getPromocoesDoHotel().isEmpty();
+	}
 }
