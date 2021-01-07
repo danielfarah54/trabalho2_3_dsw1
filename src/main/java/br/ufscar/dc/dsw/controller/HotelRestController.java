@@ -30,7 +30,7 @@ import br.ufscar.dc.dsw.service.spec.IHotelService;
 @CrossOrigin
 @RestController
 public class HotelRestController {
-	
+	//
 	@Autowired
 	private IHotelService serviceH;
 	
@@ -56,6 +56,9 @@ public class HotelRestController {
 		}
 		
 		hotel.setNome((String) json.get("nome"));
+		hotel.setEmail((String) json.get("login"));
+		hotel.setSenha((String) json.get("senha"));
+		hotel.setCnpj((String) json.get("cnpj"));
 		
 	}
 	
@@ -68,7 +71,7 @@ public class HotelRestController {
 		return ResponseEntity.ok(lista); //Devolve uma lista de hotéis.
 	}
 	
-	@GetMapping(path = "/hoteis/{id}") // Retorno Ok?
+	@GetMapping(path = "/hoteis/{id}") // Retorno Ok.
 	public ResponseEntity<Hotel> lista(@PathVariable("id") long id){
 		Hotel hotel = serviceH.buscarPorId(id);
 		if (hotel == null) {
@@ -77,74 +80,88 @@ public class HotelRestController {
 		return ResponseEntity.ok(hotel);
 	}
 	
-//	@GetMapping(path = "/hoteis/{nomeDaCidade}") // 
-//	public ResponseEntity<List<Hotel>> lista(@PathVariable("nomeDaCidade") String nomeCidade){
-//		List<Cidade> todas_Cidades = new ArrayList<Cidade>();
-//		Cidade cidadeProcurada = new Cidade();
-//		
-//		todas_Cidades = serviceC.buscarTodas();
-//		for (Cidade cidade : todas_Cidades) {
-//			if(cidade.getCidade().equals(nomeCidade)) {
-//				cidadeProcurada = cidade;
-//				break;
-//			}
-//		}
-//		
-//		List<Hotel> lista = serviceH.buscarTodosHoteisDaCidade(cidadeProcurada);
-//		if (lista.isEmpty()) {
-//			return ResponseEntity.notFound().build();
-//		}
-//		return ResponseEntity.ok(lista);
-//	}
-//	
-//	@PostMapping(path = "/hoteis")
-//	@ResponseBody
-//	public ResponseEntity<Hotel> cria(@RequestBody JSONObject json) {
-//		try {
-//			if (isJSONValid(json.toString())) {
-//				Hotel hotel = new Hotel();
-//				parse(hotel, json);
-//				serviceH.salvar(hotel);
-//				return ResponseEntity.ok(hotel);
-//			} else {
-//				return ResponseEntity.badRequest().body(null);
-//			}
-//		}catch (Exception e){
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
-//		}
-//	}
+	@GetMapping(path = "/hoteis/cidades/{nomeDaCidade}") // GET localhost:8080/hoteis/cidades/São Carlos
+													     // GET localhost:8080/hoteis/cidades/São Paulo
+														 // GET localhost:8080/hoteis/cidades/Uberaba
+	public ResponseEntity<List<Hotel>> lista(@PathVariable("nomeDaCidade") String nomeCidade){
+		List<Cidade> todas_Cidades = new ArrayList<Cidade>();
+		Cidade cidadeProcurada = new Cidade();
+		
+		todas_Cidades = serviceC.buscarTodas();
+		for (Cidade cidade : todas_Cidades) {
+			if(cidade.getCidade().equals(nomeCidade)) {
+				cidadeProcurada = cidade;
+				break;
+			}
+		}
+		
+		List<Hotel> lista = serviceH.buscarTodosHoteisDaCidade(cidadeProcurada);
+		if (lista.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(lista);
+	}
+	
+	@PostMapping(path = "/hoteis")
+	@ResponseBody
+	public ResponseEntity<Hotel> cria(@RequestBody JSONObject json) {
+// POST localhost:8080/hoteis
+// Body:		
+//		{
+//		    "nome" : "Teste Nome Hotel", "login" : "Teste nome Login", "senha" : "TesteSenha", "cnpj" : "11111111111"
 //
-//	@PutMapping(path = "/hoteis/{id}")
-//	public ResponseEntity<Hotel> atualiza(@PathVariable("id") long id, @RequestBody JSONObject json)  {
-//		try {
-//			if (isJSONValid(json.toString())) {
-//				Hotel hotel = serviceH.buscarPorId(id);
-//				if (hotel == null) {
-//					return ResponseEntity.notFound().build();
-//				}else {
-//					parse(hotel, json);
-//					serviceH.salvar(hotel);
-//					return ResponseEntity.ok(hotel);
-//				}
-//			}	
-//			else {
-//					return ResponseEntity.badRequest().body(null);
-//				}
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
 //		}
-//		
-//	}
-//	
-//	@DeleteMapping(path = "/hoteis/{id}")
-//	public ResponseEntity<Boolean> remove(@PathVariable("id") long id) {
-//		Hotel hotel = serviceH.buscarPorId(id);
-//		if (hotel == null) {
-//			return ResponseEntity.notFound().build();
-//		} else {
-//			serviceH.excluir(id);
-//			return ResponseEntity.noContent().build();
-//		}
-//	}
+		try {
+			if (isJSONValid(json.toString())) {
+				Hotel hotel = new Hotel();
+				parse(hotel, json);
+				serviceH.salvar(hotel);
+				return ResponseEntity.ok(hotel);
+			} else {
+				return ResponseEntity.badRequest().body(null);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+		}
+	}
+
+	@PutMapping(path = "/hoteis/{id}")
+// PUT localhost:8080/hoteis/7
+//	{
+//	    "nome" : "Teste updated Nome Hotel", "login" : "Teste nome Login", "senha" : "TesteSenha", "cnpj" : "11111111111"
+//
+//	}	
+	public ResponseEntity<Hotel> atualiza(@PathVariable("id") long id, @RequestBody JSONObject json)  {
+		try {
+			if (isJSONValid(json.toString())) {
+				Hotel hotel = serviceH.buscarPorId(id);
+				if (hotel == null) {
+					return ResponseEntity.notFound().build();
+				}else {
+					parse(hotel, json);
+					serviceH.salvar(hotel);
+					return ResponseEntity.ok(hotel);
+				}
+			}	
+			else {
+					return ResponseEntity.badRequest().body(null);
+				}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+		}
+		
+	}
+	
+	@DeleteMapping(path = "/hoteis/{id}")
+	//DELETE localhost:8080/hoteis/7
+	public ResponseEntity<Boolean> remove(@PathVariable("id") long id) {
+		Hotel hotel = serviceH.buscarPorId(id);
+		if (hotel == null) {
+			return ResponseEntity.notFound().build();
+		} else {
+			serviceH.excluir(id);
+			return ResponseEntity.noContent().build();
+		}
+	}
 }
