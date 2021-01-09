@@ -1,7 +1,5 @@
 package br.ufscar.dc.dsw.service.impl;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,11 @@ public class HotelService implements IHotelService{
 	public Hotel buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
+	
+	@Transactional(readOnly = true) 
+	public Hotel buscarPorLogin(String login) {
+		return dao.findByLogin(login);
+	}
 
 	@Transactional(readOnly = true)
 	public List<Hotel> buscarTodos() {
@@ -42,9 +45,9 @@ public class HotelService implements IHotelService{
 	public List<Hotel> buscarTodosHoteisDaCidade(Cidade cidade) {
 		return dao.findByCidades(cidade);
 	}
-
+	
 	@Transactional(readOnly = true)
 	public boolean hotelTemPromo(Long id) {
-		return !dao.findById(id.longValue()).getPromocoesDoHotel().isEmpty();
+		return !dao.findById(id.longValue()).getPromocoesDoHotel().isEmpty(); 
 	}
 }

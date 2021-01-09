@@ -15,6 +15,8 @@ public interface IHotelService {
 	public List<Hotel> buscarTodos();
 	
 	public List<Hotel> buscarTodosHoteisDaCidade(Cidade cidade);
-
-	public boolean hotelTemPromo(Long id);
+	
+	public Hotel buscarPorLogin(String login);
+	
+	boolean hotelTemPromo(Long id);
 }

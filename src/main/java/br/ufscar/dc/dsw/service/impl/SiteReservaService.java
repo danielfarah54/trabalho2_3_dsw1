@@ -13,7 +13,6 @@ import br.ufscar.dc.dsw.service.spec.ISiteReservaService;
 @Service
 @Transactional(readOnly = false)
 public class SiteReservaService implements ISiteReservaService{
-
 	@Autowired
 	ISiteReservaDAO dao;
 	
@@ -29,14 +28,19 @@ public class SiteReservaService implements ISiteReservaService{
 	public SiteReserva buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
+	
+	@Transactional(readOnly = true) 
+	public SiteReserva buscarPorLogin(String login) {
+		return dao.findByLogin(login);
+	}
 
 	@Transactional(readOnly = true)
 	public List<SiteReserva> buscarTodos() {
 		return dao.findAll();
 	}
-
+	
 	@Transactional(readOnly = true)
-	public boolean siteTemPromo(Long id) {
+	public boolean siteReservaTemPromo(Long id) {
 		return !dao.findById(id.longValue()).getPromocoesDoHotel().isEmpty();
 	}
 }

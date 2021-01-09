@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout2}">
 <head>
 <meta charset="UTF-8" />
 </head>
 <body>
+
 	<section class="layout-content" layout:fragment="corpo">
 
 		<nav class="navbar navbar-expand-md bg-light">
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span>Cadastrar Hotéis</span></li>
+						<span th:text="#{promohotel.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/hoteis/listar}"
-					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span>Listar Hotéis</span>
-				</a>
 			</div>
+			<a class="btn btn-primary btn-md" th:href="@{/hotel/lista}"
+				role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+				aria-hidden="true"></span> <span th:text="#{hotel.message.1}"></span>
+			</a>
 		</nav>
 
 		<div class="container" id="cadastro">
@@ -24,58 +25,59 @@
 			<div th:replace="fragments/alert"></div>
 
 			<form
-				th:action="${hotel.id == null} ? @{/hoteis/salvar} : @{/hoteis/editar}"
-				th:object="${hotel}" method="POST">
+				th:action="@{/hotel/salvar}"
+				th:object="${promohotel}" method="POST">
+
+				<div class="form-group col-md-6">
+					<label th:text="#{PromoHotel.preco.label}" for="preco"></label> 
+					<input type="text" class="form-control" id="preco" placeholder="Preço"
+						data-mask="0000,00" data-mask-reverse="true" th:field="*{preco}" 
+						th:classappend="${#fields.hasErrors('preco')} ? is-invalid" />
+					
+					<div class="invalid-feedback">
+						<span th:errors="*{preco}"></span>
+					</div>
+				</div>
 				
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="nome">Nome</label> 
-						<input type="text" class="form-control" id="nome" placeholder="Nome"
-							autofocus="autofocus" th:field="*{nome}"
-							th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
-
-						<div class="invalid-feedback">
-							<span th:errors="*{nome}"></span>
-						</div>
+				<div class="form-group col-md-6">
+					<label th:text="#{PromoHotel.iniciopromo.label}" for="iniciopromo"></label> 
+					<input type="text" class="form-control" id="iniciopromo" placeholder="Inicio da Promocao"
+						data-mask="00/00/0000" data-mask-reverse="true" th:field="*{iniciopromo}" 
+						th:classappend="${#fields.hasErrors('iniciopromo')} ? is-invalid" />
+					
+					<div class="invalid-feedback">
+						<span th:errors="*{iniciopromo}"></span>
 					</div>
-
-					<div class="form-group col-md-6">
-						<label for="login">Login</label> 
-						<input type="text" class="form-control" id="login" placeholder="Login"
-							autofocus="autofocus" th:field="*{login}"
-							th:classappend="${#fields.hasErrors('login')} ? is-invalid" />
-
-						<div class="invalid-feedback">
-							<span th:errors="*{login}"></span>
-						</div>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label th:text="#{PromoHotel.fimpromo.label}" for="fimpromo"></label> 
+					<input type="text" class="form-control" id="fimpromo" placeholder="Fim da Promocao"
+						data-mask="00/00/0000" data-mask-reverse="true" th:field="*{fimpromo}" 
+						th:classappend="${#fields.hasErrors('fimpromo')} ? is-invalid" />
+					
+					<div class="invalid-feedback">
+						<span th:errors="*{fimpromo}"></span>
 					</div>
+				</div>
+				
+				
+				<div class="form-group col-md-6">
+					<label th:text="#{PromoHotel.SiteNome.label}" for="sitereserva"></label> 
+					<select id="sitereserva" class="form-control" th:field="*{sitereserva}"
+						th:classappend="${#fields.hasErrors('sitereserva')} ? is-invalid">
+						<option value="">Selecione</option>
+						<option th:each="sitereserva : ${sitereservas}" th:value="${sitereserva.id}"
+							th:text="${sitereserva.nome}"></option>
+					</select>
 
-					<div class="form-group col-md-6">
-						<label for="senha">Senha</label> 
-						<input type="password" class="form-control" id="senha" placeholder="Senha"
-							autofocus="autofocus" th:field="*{senha}"
-							th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
-
-						<div class="invalid-feedback">
-							<span th:errors="*{senha}"></span>
-						</div>
-					</div>
-
-					<div class="form-group col-md-6">
-						<label for="cnpj">CNPJ</label> 
-						<input type="text" class="form-control" id="cnpj" placeholder="__.___.___/____-__"
-							autofocus="autofocus" th:field="*{cnpj}"
-							th:classappend="${#fields.hasErrors('cnpj')} ? is-invalid" 
-							data-mask="00.000.000/0000-00" data-mask-reverse="true" />
-						                               
-						<div class="invalid-feedback">
-							<span th:errors="*{cnpj}"></span>
-						</div>
+					<div class="invalid-feedback">
+						<span th:errors="*{sitereserva}"></span>
 					</div>
 				</div>
 
-				<input type="hidden" id="id" th:field="*{id}" />
-				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm"></button>
 			</form>
 		</div>
 	</section>

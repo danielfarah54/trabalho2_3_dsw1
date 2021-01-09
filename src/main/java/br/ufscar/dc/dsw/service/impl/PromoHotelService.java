@@ -3,14 +3,18 @@ package br.ufscar.dc.dsw.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPromoHotelDAO;
 import br.ufscar.dc.dsw.domain.Hotel;
 import br.ufscar.dc.dsw.domain.PromoHotel;
 import br.ufscar.dc.dsw.domain.SiteReserva;
+import br.ufscar.dc.dsw.service.spec.IPromoHotelService;
 
-public class PromoHotelService {
+@Service
+@Transactional(readOnly = false)
+public class PromoHotelService implements IPromoHotelService{
 	@Autowired
 	IPromoHotelDAO dao;
 	
@@ -26,20 +30,24 @@ public class PromoHotelService {
 	public PromoHotel buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
+	
+	@Transactional(readOnly = true) 
+	public PromoHotel findByIniciopromo(String iniciopromo) {
+		return dao.findByIniciopromo(iniciopromo);
+	}
 
 	@Transactional(readOnly = true)
 	public List<PromoHotel> buscarTodos() {
 		return dao.findAll();
 	}
 	
-	//TESTAR
-//	@Transactional(readOnly = true)
-//	public List<PromoHotel> buscarPorHotel(Hotel hotel) {
-//		return dao.findByhotel(hotel); // Devolve todas as promoções de um hotel específico. R6
-//	}
-//	
-//	@Transactional(readOnly = true)
-//	public List<PromoHotel> buscarPorSiteReserval(SiteReserva sitereserva) {
-//		return dao.findBysitereserva(sitereserva); // Devolve todas as promoções de um site específico. R8
-//	}
+	@Transactional(readOnly = true)
+	public List<PromoHotel> findByHotel(Hotel hotel) {
+		return dao.findByHotel(hotel);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<PromoHotel> findBySitereserva(SiteReserva sitereserva) {
+		return dao.findBySitereserva(sitereserva);
+	}
 }

@@ -1,10 +1,8 @@
 package br.ufscar.dc.dsw.dao;
 
-
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
-
 
 import br.ufscar.dc.dsw.domain.Cidade;
 
@@ -12,7 +10,7 @@ import br.ufscar.dc.dsw.domain.Cidade;
 public interface ICidadeDAO extends CrudRepository<Cidade, Long>{
 
 	List<Cidade> findAll();
-	//Usar findById
+	// Usar findById
 	Cidade save(Cidade cidade);
 	
 	void deleteById(Long id);

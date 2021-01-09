@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -45,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/", "/index", "/error").permitAll()
 				.antMatchers("/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**", "/hoteis/**").permitAll()
-				.antMatchers("/admin/**").hasRole("admin.com")
+				.antMatchers("/admin/**", "/adminhoteis/**", "/sites/**").hasRole("admin.com")
 				.antMatchers("/hotel/**").hasRole("hotel.com")
 				.antMatchers("/sitereserva/**").hasRole("siteres.com")
 				.anyRequest().authenticated()
