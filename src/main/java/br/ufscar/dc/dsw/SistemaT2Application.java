@@ -19,7 +19,6 @@ import br.ufscar.dc.dsw.dao.ISiteReservaDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
 
-
 import br.ufscar.dc.dsw.domain.*;
 
 @SpringBootApplication
@@ -43,13 +42,16 @@ public class SistemaT2Application {
 			//u1.setEnabled(true);
 			dao.save(u1);
 			
-			Usuario u2 = new Usuario("Rennes","rennes@admin.com", encoder.encode("rennes")) ;
-			//u1.setNome("Rennes");
+			Usuario u2 = new Usuario("Rennes","rennes@admin.com", encoder.encode("rennes"));
+			//u2.setNome("Rennes");
 			//u2.setLogin("rennes@admin.com");
 			//u2.setSenha(encoder.encode("rennes"));
 			//u2.setRole("ROLE_ADMIN");
 			//u2.setEnabled(true);
-			dao.save(u2);		
+			dao.save(u2);
+
+			Usuario u3 = new Usuario("Daniel","daniel@admin.com", encoder.encode("daniel"));
+			dao.save(u3);
 			
 			Cidade cidade1 = new Cidade("São Carlos");
 			Cidade cidade2 = new Cidade("São Paulo");
