@@ -6,6 +6,8 @@
 <meta charset="UTF-8" />
 </head>
 <body>
+	<!-- <a class="btn btn-primary" type="button"
+				href="@{/}"><span th:text="#{home.message.1}"></span></a> -->
 	<section class="layout-content" layout:fragment="corpo">
 		
 		<nav class="navbar navbar-expand-md bg-light">
@@ -37,6 +39,7 @@
 					</thead>
 					<tr th:each="PromoHotel : ${listapromo}">
 						<td th:text="|R$ ${#numbers.formatDecimal(PromoHotel.getPreco(),2,2,'COMMA')}|"></td>
+						<!-- "${PromoHotel.getPreco()}" -->
 						<td th:text="${PromoHotel.getIniciopromo()}"></td>
 						<td th:text="${PromoHotel.getFimpromo()}"></td>
 						<td th:text="${PromoHotel.getHotel().getNome()}"></td>

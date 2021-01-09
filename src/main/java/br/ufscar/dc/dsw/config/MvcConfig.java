@@ -15,6 +15,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import br.ufscar.dc.dsw.conversor.BigDecimalConversor;
 
+
 @Configuration
 @ComponentScan(basePackages = "br.ufscar.dc.dsw.config")
 public class MvcConfig implements WebMvcConfigurer {

@@ -21,4 +21,8 @@ public interface IHotelDAO extends CrudRepository<Hotel, Long>{
 	void deleteById(Long id);
 	
 	Hotel findByLogin(String login);
+	
+	//Procurar todas as cidades dado um estado: https://youtu.be/BsBwd5lh-8c?t=214
+//	@Query("select h from Hotel h where cidade = :cidade")
+//	public List<Hotel> findByCidade(@Param("estado") Cidade cidade);
 }

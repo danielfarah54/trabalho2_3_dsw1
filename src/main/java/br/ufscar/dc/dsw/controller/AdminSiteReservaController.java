@@ -36,6 +36,17 @@ public class AdminSiteReservaController {
 		return "admin/sitereserva/cadastro";
 	}
 	
+	/*	@GetMapping("/cadastrar")
+	public String cadastrar(ModelMap model) {
+		
+		PromoHotel promohotel = new PromoHotel();
+		Hotel hotel = serviceH.buscarPorLogin(this.getUsuario().getLogin());
+		promohotel.setHotel(hotel);
+		model.addAttribute("promohotel",promohotel);
+		
+		return "hotel/cadastro";
+	}*/
+
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("sites", service.buscarTodos());

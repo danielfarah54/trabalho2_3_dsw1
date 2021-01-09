@@ -149,7 +149,8 @@ public class HotelRestController {
 				}
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
-		}		
+		}
+		
 	}
 	
 	@DeleteMapping(path = "/hoteis/{id}")

@@ -50,4 +50,15 @@ public class PromoHotelService implements IPromoHotelService{
 	public List<PromoHotel> findBySitereserva(SiteReserva sitereserva) {
 		return dao.findBySitereserva(sitereserva);
 	}
+	
+	//TESTAR
+//	@Transactional(readOnly = true)
+//	public List<PromoHotel> buscarPorHotel(Hotel hotel) {
+//		return dao.findByhotel(hotel); // Devolve todas as promoções de um hotel específico. R6
+//	}
+//	
+//	@Transactional(readOnly = true)
+//	public List<PromoHotel> buscarPorSiteReserval(SiteReserva sitereserva) {
+//		return dao.findBysitereserva(sitereserva); // Devolve todas as promoções de um site específico. R8
+//	}
 }

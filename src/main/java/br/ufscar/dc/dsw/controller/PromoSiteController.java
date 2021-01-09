@@ -46,4 +46,5 @@ public class PromoSiteController {
 		
 		return "sitereserva/lista";
 	}
+
 }

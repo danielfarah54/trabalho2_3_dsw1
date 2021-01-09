@@ -20,3 +20,4 @@ public interface ISiteReservaDAO extends CrudRepository<SiteReserva, Long>{
 	void deleteById(Long id);
 
 }
+

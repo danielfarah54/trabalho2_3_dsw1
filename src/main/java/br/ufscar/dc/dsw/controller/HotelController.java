@@ -21,6 +21,7 @@ import br.ufscar.dc.dsw.service.spec.IHotelService;
 @Controller
 @RequestMapping("/hoteis")
 public class HotelController {
+	//
 	
 	@Autowired
 	private IHotelService service;
@@ -28,6 +29,8 @@ public class HotelController {
 	@Autowired
 	private ICidadeService serviceC;
 	
+	
+		
 	@GetMapping("/listarTodosHoteis") //USA MÉTODO GET
 	public String listarTodosHoteis(ModelMap model) {
 		model.addAttribute("hoteis",service.buscarTodos());

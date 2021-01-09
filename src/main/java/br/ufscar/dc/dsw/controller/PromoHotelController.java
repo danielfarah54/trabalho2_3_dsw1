@@ -92,4 +92,7 @@ public class PromoHotelController {
 	public List<SiteReserva> listaSiteReserva() {
 		return serviceS.buscarTodos();
 	}
+	
+
+
 }

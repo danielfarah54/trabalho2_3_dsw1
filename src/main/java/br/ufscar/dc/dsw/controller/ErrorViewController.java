@@ -33,4 +33,5 @@ public class ErrorViewController implements ErrorViewResolver {
 		}
 		return model;
 	}
+
 }
