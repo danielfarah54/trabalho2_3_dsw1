@@ -28,14 +28,20 @@ public class AdminSiteReservaController {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
-	@GetMapping("/cadastrar")
+/*	@GetMapping("/cadastrar")
 	public String cadastrar(ModelMap model) {
 		
 		SiteReserva sitereserva = new SiteReserva();
 		model.addAttribute("sitereserva",sitereserva);
 		return "admin/sitereserva/cadastro";
 	}
+*/
 	
+	@GetMapping("/cadastrar")
+	public String cadastrar(SiteReserva siteReserva) {
+		return "admin/sitereserva/cadastro";
+	}
+
 	/*	@GetMapping("/cadastrar")
 	public String cadastrar(ModelMap model) {
 		
@@ -53,7 +59,7 @@ public class AdminSiteReservaController {
 		return "admin/sitereserva/lista";
 	}
 
-	@PostMapping("/salvar")
+/*	@PostMapping("/salvar")
 	public String salvar(@Valid SiteReserva sitereserva, BindingResult result, RedirectAttributes attr) {
 
 		
@@ -67,21 +73,38 @@ public class AdminSiteReservaController {
 		attr.addFlashAttribute("sucess", "Site de Reserva inserido com sucesso");
 		return "redirect:/sites/listar";
 	}
-
+*/
+	@PostMapping("/salvar")
+	public String salvar(@Valid SiteReserva siteReserva, BindingResult result, RedirectAttributes attr) {
+		
+		if (result.hasErrors()) {
+			System.out.println(result);
+			//model.addAttribute("siteReserva",siteReserva);
+			return "admin/sitereserva/cadastro";
+		}
+		
+		//sitereserva.setId(sitereserva.getId());
+		
+		siteReserva.setSenha(encoder.encode(siteReserva.getSenha()));
+		service.salvar(siteReserva);
+		attr.addFlashAttribute("sucess", "Site de Reserva inserido com sucesso");
+		return "redirect:/sites/listar";
+	}
+	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("sitereserva", service.buscarPorId(id));
+		model.addAttribute("siteReserva", service.buscarPorId(id));
 		return "admin/sitereserva/cadastro";
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid SiteReserva sitereserva, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid SiteReserva siteReserva, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
 			return "admin/sitereserva/cadastro";
 		}
-		sitereserva.setSenha(encoder.encode(sitereserva.getSenha()));
-		service.salvar(sitereserva);
+		siteReserva.setSenha(encoder.encode(siteReserva.getSenha()));
+		service.salvar(siteReserva);
 		attr.addFlashAttribute("sucess", "Site de Reserva editado com sucesso.");
 		return "redirect:/sites/listar";
 	}
