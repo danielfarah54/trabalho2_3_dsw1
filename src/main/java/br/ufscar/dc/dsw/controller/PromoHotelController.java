@@ -1,4 +1,5 @@
 package br.ufscar.dc.dsw.controller;
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -96,7 +97,4 @@ public class PromoHotelController {
 	public List<SiteReserva> listaSiteReserva() {
 		return serviceS.buscarTodos();
 	}
-	
-
-
 }

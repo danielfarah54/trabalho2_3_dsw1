@@ -30,7 +30,7 @@ import br.ufscar.dc.dsw.service.spec.IHotelService;
 @CrossOrigin
 @RestController
 public class HotelRestController {
-	//
+	
 	@Autowired
 	private IHotelService serviceH;
 	
@@ -59,16 +59,15 @@ public class HotelRestController {
 		hotel.setEmail((String) json.get("login"));
 		hotel.setSenha((String) json.get("senha"));
 		hotel.setCnpj((String) json.get("cnpj"));
-		
 	}
 	
-	@GetMapping(path = "/hoteis") //https://youtu.be/BsBwd5lh-8c?t=378
+	@GetMapping(path = "/hoteis") // https://youtu.be/BsBwd5lh-8c?t=378
 	public ResponseEntity<List<Hotel>> lista() {
 		List<Hotel> lista = serviceH.buscarTodos();
 		if (lista.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(lista); //Devolve uma lista de hotéis.
+		return ResponseEntity.ok(lista); // Devolve uma lista de hotéis.
 	}
 	
 	@GetMapping(path = "/hoteis/{id}") // Retorno Ok.
@@ -105,12 +104,15 @@ public class HotelRestController {
 	@PostMapping(path = "/hoteis")
 	@ResponseBody
 	public ResponseEntity<Hotel> cria(@RequestBody JSONObject json) {
-// POST localhost:8080/hoteis
-// Body:		
-//		{
-//		    "nome" : "Teste Nome Hotel", "login" : "Teste nome Login", "senha" : "TesteSenha", "cnpj" : "11111111111"
-//
-//		}
+/*	POST localhost:8080/hoteis
+ 	Body:		
+		{
+		    "nome": "Teste Nome Hotel",
+			"login": "Teste nome Login",
+			"senha": "TesteSenha",
+			"cnpj": "11111111111"
+		}
+*/
 		try {
 			if (isJSONValid(json.toString())) {
 				Hotel hotel = new Hotel();
@@ -127,11 +129,14 @@ public class HotelRestController {
 	}
 
 	@PutMapping(path = "/hoteis/{id}")
-// PUT localhost:8080/hoteis/7
-//	{
-//	    "nome" : "Teste updated Nome Hotel", "login" : "Teste nome Login", "senha" : "TesteSenha", "cnpj" : "11111111111"
-//
-//	}	
+/* 	PUT localhost:8080/hoteis/7
+	{
+	    "nome": "Teste updated Nome Hotel",
+	    "login": "Teste nome Login",
+	    "senha": "TesteSenha",
+	    "cnpj": "11111111111"
+	}
+*/
 	public ResponseEntity<Hotel> atualiza(@PathVariable("id") long id, @RequestBody JSONObject json)  {
 		try {
 			if (isJSONValid(json.toString())) {
@@ -154,7 +159,7 @@ public class HotelRestController {
 	}
 	
 	@DeleteMapping(path = "/hoteis/{id}")
-	//DELETE localhost:8080/hoteis/7
+	// DELETE localhost:8080/hoteis/7
 	public ResponseEntity<Boolean> remove(@PathVariable("id") long id) {
 		Hotel hotel = serviceH.buscarPorId(id);
 		if (hotel == null) {

@@ -9,8 +9,6 @@ import br.ufscar.dc.dsw.*;
 class SistemaT2ApplicationTests {
 
 	@Test
-	void contextLoads() {
-				
+	void contextLoads() {			
 	}
-
 }

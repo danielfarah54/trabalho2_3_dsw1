@@ -17,5 +17,4 @@ public class BigDecimalConversor implements Converter<String, BigDecimal> {
 		
 		return new BigDecimal(Double.parseDouble(text));
 	}
-
 }

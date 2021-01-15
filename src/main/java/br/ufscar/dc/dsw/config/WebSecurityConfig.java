@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -42,9 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		//http.authorizeRequests()
+		http.csrf().disable().authorizeRequests()
 				.antMatchers("/", "/index", "/error").permitAll()
-				.antMatchers("/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**", "/hoteis/**").permitAll()
+				.antMatchers("/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**", "/hoteis/**", "/promocoes/**").permitAll()
+				.antMatchers("/hoteis").permitAll()
+				.antMatchers("/hoteis/{\\d+}").permitAll()
+				.antMatchers("/promocoes/{\\d+}").permitAll()
+				.antMatchers("/siterest").permitAll()
+				.antMatchers("/siterest/{\\d+}").permitAll()
 				.antMatchers("/admin/**", "/adminhoteis/**", "/sites/**").hasRole("admin.com")
 				.antMatchers("/hotel/**").hasRole("hotel.com")
 				.antMatchers("/sitereserva/**").hasRole("siteres.com")

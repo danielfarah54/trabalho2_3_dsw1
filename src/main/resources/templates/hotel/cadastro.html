@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout2}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout2}">
 <head>
-<meta charset="UTF-8" />
+	<meta charset="UTF-8" />
 </head>
 <body>
 
@@ -76,7 +78,6 @@
 					</div>
 				</div>
 
-				<!-- <input type="hidden" id="id" th:field="*{id}" /> -->
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>
 			</form>

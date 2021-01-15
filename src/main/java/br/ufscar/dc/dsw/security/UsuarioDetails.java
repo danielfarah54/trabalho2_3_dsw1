@@ -21,7 +21,7 @@ public class UsuarioDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-    	String[] dominio = user.getLogin().split("@"); //para definir o papel do usuario pelo dominio do email
+    	String[] dominio = user.getLogin().split("@"); // para definir o papel do usuario pelo dominio do email
 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + dominio[1]);
         return Arrays.asList(authority);

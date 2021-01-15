@@ -1,9 +1,8 @@
 package br.ufscar.dc.dsw.domain;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set; //Classe do java que permite não repetição.
+import java.util.Set; // Classe do java que permite não repetição.
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +16,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
-//Classe mapeada para a tabela:
-//create table Cidade(
-
-//	);
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Cidade")
@@ -32,16 +26,15 @@ public class Cidade extends AbstractEntity<Long>{
 	@Column(nullable = false, unique = false, length = 200)
     private String nomeCidade;
 	
-	@ManyToMany	(targetEntity=Hotel.class)//Uma cidade pode conter vários hotéis, e um hotel pode estar em várias cidades.
+	@ManyToMany	(targetEntity=Hotel.class) // Uma cidade pode conter vários hotéis, e um hotel pode estar em várias cidades.
 	private Set<Hotel> hotelDaCidade;
 
 	public Cidade() {
 	}
-	
-	
+		
 	public Cidade(String nomeCidade) {
 		this.nomeCidade = nomeCidade;
-		this.hotelDaCidade = new HashSet<Hotel>(); //antes de add, usar método setCidade.
+		this.hotelDaCidade = new HashSet<Hotel>(); // antes de add, usar método setCidade.
 	}
 	
 	public Cidade(String nomeCidade, Set<Hotel> hotelDaCidade) {
@@ -61,7 +54,6 @@ public class Cidade extends AbstractEntity<Long>{
 	public void setCidade(String nomeCidade) {
 		this.nomeCidade = nomeCidade;
 	}
-	
 	
 	public Set<Hotel> getHotelDaCidade() {
 		return this.hotelDaCidade;

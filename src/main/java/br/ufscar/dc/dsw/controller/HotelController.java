@@ -21,27 +21,24 @@ import br.ufscar.dc.dsw.service.spec.IHotelService;
 @Controller
 @RequestMapping("/hoteis")
 public class HotelController {
-	//
 	
 	@Autowired
 	private IHotelService service;
 	
 	@Autowired
-	private ICidadeService serviceC;
-	
-	
+	private ICidadeService serviceC;	
 		
-	@GetMapping("/listarTodosHoteis") //USA MÉTODO GET
+	@GetMapping("/listarTodosHoteis") // USA MÉTODO GET
 	public String listarTodosHoteis(ModelMap model) {
 		model.addAttribute("hoteis",service.buscarTodos());
-		//o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
+		// o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
 		return "hoteis/listarTodosHoteis"; // renderiza para a visão hoteis/listarTodosHoteis
 	}
 	
-	@PostMapping("/listarTodosHoteis") //USA MÉTODO POST
+	@PostMapping("/listarTodosHoteis") // USA MÉTODO POST
 	public String listarTodosHoteisPost(ModelMap model) {
 		model.addAttribute("hoteis",service.buscarTodos());
-		//o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
+		// o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
 		return "hoteis/listarTodosHoteis"; // renderiza para a visão hoteis/listarTodosHoteis
 	}
 

@@ -1,8 +1,5 @@
 package br.ufscar.dc.dsw.domain;
 
-
-
-
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -17,19 +14,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
-//create table PromoHotel(
-
-//	);
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "PromoHotel")
 public class PromoHotel extends AbstractEntity<Long>{
 	
-	/*@NotNull(message = "{NotBlank.promoHotel.preco}")
+/*	@NotNull(message = "{NotBlank.promoHotel.preco}")
 	@Column(nullable=false, unique=false)
-    private double preco; //float e double não funcionam (?).*/
+    private double preco; // float e double não funcionam (?).
+*/
 	
 	@NotNull(message = "{NotBlank.promoHotel.preco}")
 	@Column(nullable = false, unique=false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
@@ -45,23 +38,22 @@ public class PromoHotel extends AbstractEntity<Long>{
 	@Column(nullable=false, unique=false, length=10)
 	private String fimpromo;
     
-	@ManyToOne //Várias promoções podem ser de um mesmo hotel.
-	@JoinColumn(name = "hotel_id") //Solicita para o JPA que ele crie uma coluna no DB que é chave estrangeira para id da tabela Hotel.
-								   //hotel_id passa a ser uma coluna na tabela PromoHotel, que é chave estrangeira para id da tabela Hotel.
+	@ManyToOne // Várias promoções podem ser de um mesmo hotel.
+	@JoinColumn(name = "hotel_id") // Solicita para o JPA que ele crie uma coluna no DB que é chave estrangeira para id da tabela Hotel.
+								   // hotel_id passa a ser uma coluna na tabela PromoHotel, que é chave estrangeira para id da tabela Hotel.
 	private Hotel hotel;
 	
-	
-	@ManyToOne //Várias promoções podem ser atribuídas a um mesmo site de reservas.
+	@ManyToOne // Várias promoções podem ser atribuídas a um mesmo site de reservas.
 	@JoinColumn(name = "sitereserva_id")
     private SiteReserva sitereserva;
 
 	public PromoHotel() {
     }
-	
-//    public PromoHotel(Long id) {
-//        this.id = id;
-//    }
 
+/*  public PromoHotel(Long id) {
+        this.id = id;
+    }
+*/
 	public PromoHotel(BigDecimal preco, String iniciopromo, String fimpromo, Hotel hotel) {
 		this.preco = preco;
 	    this.iniciopromo = iniciopromo;
@@ -83,14 +75,14 @@ public class PromoHotel extends AbstractEntity<Long>{
 	    //this.id = id;
 	}
 	
-//	public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+/*	public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+*/
     public BigDecimal getPreco() {
         return preco;
     }
