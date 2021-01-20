@@ -5,6 +5,7 @@ Sistema para gerenciamento de promoções de hotel em sites de reservas. Realiza
 ## Arquitetura:
 
 * Modelo-Visão-Controlador
+* REST
 
 ## Ambiente de Desenvolvimento:
 
@@ -12,6 +13,7 @@ Sistema para gerenciamento de promoções de hotel em sites de reservas. Realiza
 
 ## Tecnologias Utilizadas:
 
-* Servlet, JSP, JSTL e JDBC (lado do servidor)
+* Spring MVC, Spring Data JPA, Spring Security e Thymeleaf (lado do servidor)
 * Javascript e CSS (lado do cliente)
 * MySQL
+* REST API
