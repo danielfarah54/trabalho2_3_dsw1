@@ -47,9 +47,7 @@ public class PromoHotelController {
 	public String listar(ModelMap model) {
 					
 		Hotel hotel = serviceH.buscarPorLogin(this.getUsuario().getLogin());
-		//System.out.println(hotel);
 		model.addAttribute("listapromo",serviceP.findByHotel(hotel));
-		//System.out.println(serviceP.findByHotel(hotel));
 		
 		return "hotel/lista";
 	}

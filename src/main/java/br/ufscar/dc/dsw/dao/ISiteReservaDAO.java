@@ -10,12 +10,8 @@ import br.ufscar.dc.dsw.domain.SiteReserva;
 public interface ISiteReservaDAO extends CrudRepository<SiteReserva, Long>{
 	
 	SiteReserva findById(long id);
-	
 	List<SiteReserva> findAll();
-	
-	SiteReserva save(SiteReserva sitereserva); // faz as operações de save e update.
-	
+	SiteReserva save(SiteReserva sitereserva);
 	SiteReserva findByLogin(String login);
-	
 	void deleteById(Long id);
 }

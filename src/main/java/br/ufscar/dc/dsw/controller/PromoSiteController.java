@@ -40,10 +40,8 @@ public class PromoSiteController {
 	@GetMapping("/lista")
 	public String listar(ModelMap model) {
 					
-		SiteReserva site = serviceS.buscarPorLogin(this.getUsuario().getLogin()); //busca site de reservas de acordo com usuario logado
-		//System.out.println(hotel);
+		SiteReserva site = serviceS.buscarPorLogin(this.getUsuario().getLogin());
 		model.addAttribute("listapromo",serviceP.findBySitereserva(site));
-		//System.out.println(serviceP.findByHotel(hotel));
 		
 		return "sitereserva/lista";
 	}

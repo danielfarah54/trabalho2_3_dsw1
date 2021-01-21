@@ -57,16 +57,16 @@ public class SiteReservaRestController {
 		siteReserva.setTelefone((String) json.get("telefone"));
 	}
 	
-	@GetMapping(path = "/siterest") // https://youtu.be/BsBwd5lh-8c?t=378
+	@GetMapping(path = "/siterest")
 	public ResponseEntity<List<SiteReserva>> lista() {
 		List<SiteReserva> lista = service.buscarTodos();
 		if (lista.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(lista); // Devolve uma lista de sites
+		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping(path = "/siterest/{id}") // Retorno Ok
+	@GetMapping(path = "/siterest/{id}")
 	public ResponseEntity<SiteReserva> lista(@PathVariable("id") long id){
 		SiteReserva siteReserva = service.buscarPorId(id);
 		if (siteReserva == null) {

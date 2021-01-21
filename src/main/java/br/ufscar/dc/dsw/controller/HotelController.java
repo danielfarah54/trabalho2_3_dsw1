@@ -28,18 +28,16 @@ public class HotelController {
 	@Autowired
 	private ICidadeService serviceC;	
 		
-	@GetMapping("/listarTodosHoteis") // USA MÉTODO GET
+	@GetMapping("/listarTodosHoteis")
 	public String listarTodosHoteis(ModelMap model) {
 		model.addAttribute("hoteis",service.buscarTodos());
-		// o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
-		return "hoteis/listarTodosHoteis"; // renderiza para a visão hoteis/listarTodosHoteis
+		return "hoteis/listarTodosHoteis";
 	}
 	
-	@PostMapping("/listarTodosHoteis") // USA MÉTODO POST
+	@PostMapping("/listarTodosHoteis")
 	public String listarTodosHoteisPost(ModelMap model) {
 		model.addAttribute("hoteis",service.buscarTodos());
-		// o método service.buscarTodos(); retorna todos os hotéis, então o método de model atribui o valor a um atributo de modelo chamado hoteis.
-		return "hoteis/listarTodosHoteis"; // renderiza para a visão hoteis/listarTodosHoteis
+		return "hoteis/listarTodosHoteis";
 	}
 
 	@GetMapping("/formParaBuscaDeHotelPorCidade")
@@ -59,6 +57,6 @@ public class HotelController {
 			model.addAttribute("hotelDaCidade", service.buscarTodosHoteisDaCidade(cidade));
 		}
 		
-		return "hoteis/formParaBuscaDeHotelPorCidade"; //Renderiza para formParaBuscaDeHotelPorCidade.html
+		return "hoteis/formParaBuscaDeHotelPorCidade";
 	}
 }

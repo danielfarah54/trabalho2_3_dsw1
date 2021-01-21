@@ -4,10 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-//import javax.persistence.ManyToMany;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -32,8 +28,7 @@ public class Usuario extends AbstractEntity<Long>{
 	@Column(nullable = false, length = 64)
 	private String senha;
 	
-	public Usuario() {
-		
+	public Usuario() {		
 	}
 	
 	public Usuario(String nome, String login, String senha) {
@@ -47,10 +42,6 @@ public class Usuario extends AbstractEntity<Long>{
 		return super.getId();
 	}
 
-/*	public void setId(Long id) {
-		this.id = id;
-	}
-*/
 	public String getNome() {
 		return nome;
 	}

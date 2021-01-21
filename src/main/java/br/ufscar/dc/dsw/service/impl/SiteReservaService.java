@@ -38,9 +38,4 @@ public class SiteReservaService implements ISiteReservaService{
 	public List<SiteReserva> buscarTodos() {
 		return dao.findAll();
 	}
-	
-	/*@Transactional(readOnly = true)
-	public boolean siteReservaTemPromo(Long id) {
-		return !dao.findById(id.longValue()).getPromocoesDoHotel().isEmpty();
-	}*/
 }

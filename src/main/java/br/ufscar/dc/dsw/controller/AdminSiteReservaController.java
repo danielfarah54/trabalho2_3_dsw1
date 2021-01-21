@@ -33,14 +33,6 @@ public class AdminSiteReservaController {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
-/*	@GetMapping("/cadastrar")
-	public String cadastrar(ModelMap model) {
-		
-		SiteReserva sitereserva = new SiteReserva();
-		model.addAttribute("sitereserva",sitereserva);
-		return "admin/sitereserva/cadastro";
-	}
-*/	
 	@GetMapping("/cadastrar")
 	public String cadastrar(SiteReserva siteReserva) {
 		return "admin/sitereserva/cadastro";
@@ -56,13 +48,10 @@ public class AdminSiteReservaController {
 	public String salvar(@Valid SiteReserva siteReserva, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			System.out.println(result);
-			//model.addAttribute("siteReserva",siteReserva);
-      
+			System.out.println(result);      
 			return "admin/sitereserva/cadastro";
 		}
 		
-		//sitereserva.setId(sitereserva.getId());
 		siteReserva.setSenha(encoder.encode(siteReserva.getSenha()));
 		service.salvar(siteReserva);
 		attr.addFlashAttribute("sucess", "Site de Reserva inserido com sucesso");
@@ -89,11 +78,9 @@ public class AdminSiteReservaController {
 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		//if (service.siteReservaTemPromo(id)) {
 		SiteReserva siteReserva = service.buscarPorId(id);
 		List<PromoHotel> promosite = serviceP.findBySitereserva(siteReserva); // verifica se existe promoções deste site de reservas
 		
-		//System.out.println(promosite);
 		if (promosite.isEmpty()) {
 			service.excluir(id);
 			model.addAttribute("sucess", "Site de Reserva excluído com sucesso.");

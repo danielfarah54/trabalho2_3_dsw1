@@ -11,18 +11,9 @@ import br.ufscar.dc.dsw.domain.Hotel;
 public interface IHotelDAO extends CrudRepository<Hotel, Long>{
 	
 	Hotel findById(long id);
-	
 	List<Hotel> findAll();
-	
-	List<Hotel> findByCidades(Cidade cidade); // Devolve todas os hotéis de uma cidade.
-	
-	Hotel save (Hotel hotel); // faz as operações de save e update.
-	
+	List<Hotel> findByCidades(Cidade cidade);
+	Hotel save(Hotel hotel);
 	void deleteById(Long id);
-	
 	Hotel findByLogin(String login);
-	
-	//Procurar todas as cidades dado um estado: https://youtu.be/BsBwd5lh-8c?t=214
-//	@Query("select h from Hotel h where cidade = :cidade")
-//	public List<Hotel> findByCidade(@Param("estado") Cidade cidade);
 }

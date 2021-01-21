@@ -24,8 +24,6 @@ import br.ufscar.dc.dsw.domain.*;
 @SpringBootApplication
 public class SistemaT2Application {
 	
-//	private static final Logger log = LoggerFactory.getLogger(SistemaT2Application.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaT2Application.class, args);
 	}
@@ -55,23 +53,22 @@ public class SistemaT2Application {
 			Set<Cidade> set2cidade = new HashSet<Cidade>();
 			Set<Cidade> set3cidade = new HashSet<Cidade>();
 			
-			set1cidade.add(cidade1); // Adiciona São Carlos a set1cidade.
+			set1cidade.add(cidade1); // Adiciona São Carlos a set1cidade
 						
-			set2cidade.add(cidade1);  // Adiciona São Carlos ao objeto.
+			set2cidade.add(cidade1);  // Adiciona São Carlos ao objeto
 			set2cidade.add(cidade2); // Adiciona São Paulo a setcidade2
 			
-			set3cidade.add(cidade1); // Adiciona São Carlos ao objeto.
-			set3cidade.add(cidade2); // Adiciona São Paulo ao objeto.
-			set3cidade.add(cidade3); // Adiciona Uberaba ao objeto.
+			set3cidade.add(cidade1); // Adiciona São Carlos ao objeto
+			set3cidade.add(cidade2); // Adiciona São Paulo ao objeto
+			set3cidade.add(cidade3); // Adiciona Uberaba ao objeto
 			
 			Hotel hotel1 = new Hotel("55.789.390/0008-99", "Hotel Boa Viagem", set1cidade, "hotel1@hotel.com", encoder.encode("hotel1"));
 			Hotel hotel2 = new Hotel("71.150.470/0001-40", "Hotel Bela Vista", set2cidade, "hotel2@hotel.com", encoder.encode("hotel2"));
 			Hotel hotel3 = new Hotel("32.106.536/0001-82", "Hotel Bienvenido", set3cidade, "hotel3@hotel.com", encoder.encode("hotel3"));
 			
-			//log.info("Salvando hotéis");
-			hotelDAO.save(hotel1); // not a transient instance  anymore - Hotel Boa Viajem está em São Carlos e São Paulo.
-			hotelDAO.save(hotel2); // not a transient instance  anymore - Hotel Bela Vista está em São Carlos. 
-			hotelDAO.save(hotel3); // not a transient instance  anymore - Hotel Bienvenido está em Uberaba e São Pualo.
+			hotelDAO.save(hotel1); // Hotel Boa Viajem está em São Carlos e São Paulo
+			hotelDAO.save(hotel2); // Hotel Bela Vista está em São Carlos
+			hotelDAO.save(hotel3); // Hotel Bienvenido está em Uberaba e São Pualo
 			
 			Set<Hotel> set1hotel = new HashSet<Hotel>();
 			set1hotel.add(hotel1);
@@ -82,60 +79,47 @@ public class SistemaT2Application {
 			Set<Hotel> set3hotel = new HashSet<Hotel>();
 			set3hotel.add(hotel3);
 			
-			// ATUALIZAR OBJETOS DOS SETS: 
+			// Atualizar objetos dos sets:
 			Set<Cidade> set1cidadeUP = new HashSet<Cidade>();
 			Set<Cidade> set2cidadeUP = new HashSet<Cidade>();
 			Set<Cidade> set3cidadeUP = new HashSet<Cidade>();
 			
-			// ATENÇÃO ORDEM (PRIMEIRO INICIALIZAR COM O  método setHotelDaCidade):
+			// Atenção ordem (primeiro inicializar com o método setHotelDaCidade):
 			// Inicializa o atributo hotelDaCidade dos objetos que representam as cidades com o método set1hotel
 			for (Cidade c : set3cidade) {
-			    c.setHotelDaCidade(set3hotel); // Insere hotel3 nos objetos que estão no set3cidade (persistir).
-			    
-			    cidadeDAO.save(c); // not a transient instance  anymore
+			    c.setHotelDaCidade(set3hotel); // Insere hotel3 nos objetos que estão no set3cidade
+			    cidadeDAO.save(c);
 			    set3cidadeUP.add(c);
-			} // São Carlos, São Paulo e Uberaba agora contém o Hotel Bienvenido.
+			} // São Carlos, São Paulo e Uberaba agora contém o Hotel Bienvenido
 			
-			// ADD
 			for (Cidade c : set2cidade) {
-			    c.addHotelDaCidade(hotel2); // Insere hotel2 no objeto que está no set2cidade (persistir).
-			    
-			    cidadeDAO.save(c); // not a transient instance  anymore
+			    c.addHotelDaCidade(hotel2); // Insere hotel2 no objeto que está no set2cidade
+			    cidadeDAO.save(c);
 			    set2cidadeUP.add(c);
-			} // São Carlos e São Paulo agora contém o Hotel Bela Vista.
+			} // São Carlos e São Paulo agora contém o Hotel Bela Vista
 			
-			// ADD
 			for (Cidade c : set1cidade) {
-			    c.addHotelDaCidade(hotel1); // atribui set1hotel nos objetos de cada cidade do Set set1cidade1. (persistir)
-			    cidadeDAO.save(c); // not a transient instance  anymore
+			    c.addHotelDaCidade(hotel1); // atribui set1hotel nos objetos de cada cidade do Set set1cidade1
+			    cidadeDAO.save(c);
 			    set1cidadeUP.add(c);
-			} // São Carlos agora contém o hotel Boa Viajem.
-			
-			// Re-inicializa o atributo cidades do objeto hotel1 com set1cidade (que agora possui os objetos atualizados).
-			//hotel1.setCidades(set1cidadeUP);
+			} // São Carlos agora contém o hotel Boa Viajem
 			
 			hotel1.addCidade(cidade1);
 			hotel1.addCidade(cidade2);
 			hotel1.addCidade(cidade3);
-			hotelDAO.save(hotel1); // atualiza bd (localização do Hotel Boa Viagem atualizada pra São Carlos.
+			hotelDAO.save(hotel1); // atualiza bd (localização do Hotel Boa Viagem atualizada pra São Carlos
 			
-			// Re-inicializa o atributo cidades do objeto hotel2 com set2cidade (que agora possui o objeto atualizado).
+			// Re-inicializa o atributo cidades do objeto hotel2 com set2cidade (que agora possui o objeto atualizado)
 			hotel2.setCidades(set2cidadeUP);
-			//hotel2.addCidade(cidade1);
-			hotelDAO.save(hotel2); // atualiza bd (localização do Hotel Bela Vista atualizada pra São Carlos e São Paulo.
+			hotelDAO.save(hotel2); // atualiza bd (localização do Hotel Bela Vista atualizada pra São Carlos e São Paulo
 			
 			hotel3.setCidades(set3cidadeUP);
-			//hotel2.addCidade();
-			hotelDAO.save(hotel3); // atualiza bd (localização do Hotel Bienvenido atualizada pra São Carlos, São Paulo e Uberaba).
+			hotelDAO.save(hotel3); // atualiza bd (localização do Hotel Bienvenido atualizada pra São Carlos, São Paulo e Uberaba)
 			
-			// Dúvida não testada: listpromoTeste não pode ser vazia para invocar o método addPromocoesDoHotel da classe siteReserva.
-			// Invocar o método setPromocoesDoHotel da classe siteReserva antes?
-	
 			SiteReserva sitereserva1 =  new SiteReserva("www.sitereservabrasil.com", "Reserva Brasil'", "(16)1234-5678", "site1@siteres.com", encoder.encode("site1"));
 			SiteReserva sitereserva2 =  new SiteReserva("www.siteboareserva.com", "Boa Reserva", "(16)1234-5688", "site2@siteres.com", encoder.encode("site2"));
 			SiteReserva sitereserva3 =  new SiteReserva("www.sitebelareserva.com", "Bela Reserva", "(16)1234-5699", "site3@siteres.com", encoder.encode("site3"));
 
-			//log.info("Salvando Site");
 			siteReservaDAO.save(sitereserva1);
 			siteReservaDAO.save(sitereserva2);
 			siteReservaDAO.save(sitereserva3);
@@ -144,7 +128,6 @@ public class SistemaT2Application {
 			PromoHotel promoHotel2 = new PromoHotel(BigDecimal.valueOf(430.5), "2020-11-11", "2020-12-11", hotel2, sitereserva2);
 			PromoHotel promoHotel3 = new PromoHotel(BigDecimal.valueOf(355.5), "2020-11-11", "2020-12-11", hotel3, sitereserva3);
 
-			//log.info("Salvando Promoção");
 			promoHotelDAO.save(promoHotel1);
 			promoHotelDAO.save(promoHotel2);
 			promoHotelDAO.save(promoHotel3);
@@ -156,17 +139,7 @@ public class SistemaT2Application {
 			set1promoHotel1.add(promoHotel1);
 			set2promoHotel2.add(promoHotel2);
 			set3promoHotel3.add(promoHotel3);
-
-			// Não testado:
-			//sitereserva1.addPromocoesDoHotel(promoHotel1);
-			//sitereserva2.addPromocoesDoHotel(promoHotel2);
-			//sitereserva3.addPromocoesDoHotel(promoHotel3);
 			
-			/*sitereserva1.setPromocoesDoHotel(set1promoHotel1);
-			sitereserva2.setPromocoesDoHotel(set2promoHotel2);
-			sitereserva3.setPromocoesDoHotel(set3promoHotel3);*/
-			
-			//log.info("Atualizando Promoção");
 			promoHotelDAO.save(promoHotel1);
 			promoHotelDAO.save(promoHotel2);
 			promoHotelDAO.save(promoHotel3);

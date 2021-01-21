@@ -12,17 +12,10 @@ import br.ufscar.dc.dsw.domain.SiteReserva;
 public interface IPromoHotelDAO extends CrudRepository<PromoHotel, Long>{
 	
 	PromoHotel findById(long id);
-	
 	PromoHotel findByIniciopromo(String iniciopromo);
-	
 	List<PromoHotel> findAll();
-	
-	// TESTAR
-	List<PromoHotel> findByHotel(Hotel hotel); // Devolve todas as promoções de um hotel específico. R6
-	
-	List<PromoHotel> findBySitereserva(SiteReserva sitereserva); // Devolve todas as promoções de um site específico. R8
-
-	PromoHotel save(PromoHotel promohotel); // faz as operações de save e update.
-	
+	List<PromoHotel> findByHotel(Hotel hotel);
+	List<PromoHotel> findBySitereserva(SiteReserva sitereserva);
+	PromoHotel save(PromoHotel promohotel);
 	void deleteById(Long id);
 }

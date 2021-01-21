@@ -1,6 +1,4 @@
-/*
- * Base structure
- */
+/* Base structure */
 html, body {
 	height: 100%;
 }
@@ -10,18 +8,14 @@ body {
 	padding-left: 0;
 } 
 
-/*
- * main layout
- */
+/* Main layout */
 .layout-main {
     display: flex;
     min-height: calc(80vh - 52px);
     overflow: hidden;
 }
 
-/*
- * Content
- */
+/* Content */
 .layout-content {
     width: 100%;
     padding-top: 0px;
@@ -32,9 +26,7 @@ body {
 	padding-top: 20px;
 }
 
-/*
- * Sidebar
- */
+/* Sidebar */
 .sidebar {
     width: 0px;
     height: 80vh;
@@ -82,26 +74,20 @@ body {
     width: 300px;
 }
 
-/*
- * nav-pills home
- */
+/* nav-pills home */
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
 	color: #fff;
 	background-color: #1e94d2;
 }
 
-/*
- * toogle do navbar do menu
- */ 
+/* toogle do navbar do menu */ 
 
 .navbar-toggle {
     display: inline-block;
     margin-left: 10px;
 }
 
-/*
- * Footer
- */
+/* Footer */
 .layout-footer {
 	position: relative;
 	left: 0;

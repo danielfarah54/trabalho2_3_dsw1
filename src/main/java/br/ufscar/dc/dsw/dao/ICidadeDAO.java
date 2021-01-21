@@ -10,8 +10,6 @@ import br.ufscar.dc.dsw.domain.Cidade;
 public interface ICidadeDAO extends CrudRepository<Cidade, Long>{
 
 	List<Cidade> findAll();
-	// Usar findById
-	Cidade save(Cidade cidade);
-	
+	Cidade save(Cidade cidade);	
 	void deleteById(Long id);	
 }
