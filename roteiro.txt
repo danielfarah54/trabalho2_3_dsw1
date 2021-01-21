@@ -1,0 +1,51 @@
+- Roteiro de execução -
+
+- SGBD utilizado: MySQL
+
+- Nome do banco de dados: SistemaT2
+
+- Comandos SQL para executar antes de fazer o deploy:
+	CREATE DATABASE SistemaT2;
+	CREATE USER 'user'@'localhost' IDENTIFIED BY 'Us3rl0c4lh0st10@';
+	GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
+	FLUSH PRIVILEGES;
+    
+- Executar o comando na raiz do projeto:
+	sudo mvn spring-boot:run
+      
+- Usuários:
+ 	login: daniel@admin.com
+	senha: daniel
+	papel: Admin
+
+	login: luis@admin.com
+	senha: luis
+	papel: Admin
+
+	login: rennes@admin.com
+	senha: rennes
+	papel: Admin
+
+	login: hotel1@hotel.com
+	senha: hotel1
+	papel: Hotel
+	  
+	login: hotel2@hotel.com
+	senha: hotel2
+	papel: Hotel
+
+	login: hotel3@hotel.com
+	senha: hotel3
+	papel: Hotel
+
+	login: site1@siteres.com
+	senha: site1
+	papel: Site de Reserva
+
+	login: site2@siteres.com
+	senha: site2
+	papel: Site de Reserva
+
+	login: site3@siteres.com
+	senha: site3
+	papel: Site de Reserva
